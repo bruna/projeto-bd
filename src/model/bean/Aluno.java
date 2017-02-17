@@ -1,11 +1,13 @@
 package model.bean;
 
+import java.sql.Date;
+
 public class Aluno {
 
 	private String cpf;
 	private String nome;
 	private String curso;
-	private String dataInicio;
+	private Date dataInicio;
 	public String getCpf() {
 		return cpf;
 	}
@@ -24,10 +26,10 @@ public class Aluno {
 	public void setCurso(String curso) {
 		this.curso = curso;
 	}
-	public String getDataInicio() {
+	public Date getDataInicio() {
 		return dataInicio;
 	}
-	public void setDataInicio(String dataInicio) {
+	public void setDataInicio(Date dataInicio) {
 		this.dataInicio = dataInicio;
 	}
 	

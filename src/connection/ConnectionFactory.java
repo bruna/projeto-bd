@@ -32,7 +32,7 @@ public class ConnectionFactory {
 			con.close();
 			} 
 		} catch (SQLException ex) {
-			Logger.getLogger(ConnectionFactory.class.getName()).log(Level.SEVERE, null, ex);
+			Logger.getLogger(ConnectionFactory.class.getName(), null).log(Level.SEVERE, null, ex);
 		}
 	}
 		
@@ -64,6 +64,5 @@ public class ConnectionFactory {
 				} catch (SQLException ex) {
 					Logger.getLogger(ConnectionFactory.class.getName(), null).log(Level.SEVERE, null, ex);
 				}		
-
 	}
 }

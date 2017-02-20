@@ -23,15 +23,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-
-public class ViewAluno extends JFrame {
+public class ViewDisciplina extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField txtCPF;
-	private JTextField txtNome;
-	private JTextField txtCurso;
+	private JTextField txtNumDiscipl;
+	private JTextField txtDNome;
+	private JTextField txtDepto;
 	private JTable jTProduto;
-	private JTextField txtDataI;
 
 	/**
 	 * Launch the application.
@@ -40,7 +38,7 @@ public class ViewAluno extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ViewAluno frame = new ViewAluno();
+					ViewDisciplina frame = new ViewDisciplina();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -52,18 +50,14 @@ public class ViewAluno extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public ViewAluno() {
-		setTitle("Tabela Aluno");
-		
-		//DefaultTableModel modelo = (DefaultTableModel) jTProduto.getModel();
-		//jTProduto.setRowSorter(new TableRowSorter<TableModel>(modelo));
-		
+	public ViewDisciplina() {
+		setTitle("Tabela Disciplina");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 806, 532);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		setContentPane(contentPane);
 		
 		JPanel panel = new JPanel();
 		panel.setBounds(10, 11, 770, 161);
@@ -75,39 +69,39 @@ public class ViewAluno extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				
 				DefaultTableModel dtmProdutos = (DefaultTableModel)jTProduto.getModel();
-				Object[] dados = {txtCPF.getText(),txtNome.getText(),txtCurso.getText(),txtDataI.getText()};
+				Object[] dados = {txtNumDiscipl.getText(),txtDNome.getText(),txtDepto.getText()};
 				dtmProdutos.addRow(dados);
 			}
 		});
 		btnNewButton.setBounds(33, 114, 117, 23);
 		panel.add(btnNewButton);
 		
-		JLabel lblNewLabel = new JLabel("CPF");
+		JLabel lblNewLabel = new JLabel("NumDiscipl");
 		lblNewLabel.setBounds(20, 11, 84, 14);
 		panel.add(lblNewLabel);
 		
-		JLabel lblQtd = new JLabel("Nome");
+		JLabel lblQtd = new JLabel("DNome");
 		lblQtd.setBounds(162, 11, 46, 14);
 		panel.add(lblQtd);
 		
-		JLabel lblNewLabel_1 = new JLabel("Curso");
+		JLabel lblNewLabel_1 = new JLabel("Depto");
 		lblNewLabel_1.setBounds(304, 11, 46, 14);
 		panel.add(lblNewLabel_1);
 		
-		txtCPF = new JTextField();
-		txtCPF.setBounds(10, 36, 130, 20);
-		panel.add(txtCPF);
-		txtCPF.setColumns(10);
+		txtNumDiscipl = new JTextField();
+		txtNumDiscipl.setBounds(10, 36, 130, 20);
+		panel.add(txtNumDiscipl);
+		txtNumDiscipl.setColumns(10);
 		
-		txtNome = new JTextField();
-		txtNome.setBounds(162, 36, 122, 20);
-		panel.add(txtNome);
-		txtNome.setColumns(10);
+		txtDNome = new JTextField();
+		txtDNome.setBounds(162, 36, 122, 20);
+		panel.add(txtDNome);
+		txtDNome.setColumns(10);
 		
-		txtCurso = new JTextField();
-		txtCurso.setBounds(304, 36, 130, 20);
-		panel.add(txtCurso);
-		txtCurso.setColumns(10);
+		txtDepto = new JTextField();
+		txtDepto.setBounds(304, 36, 130, 20);
+		panel.add(txtDepto);
+		txtDepto.setColumns(10);
 		
 		JButton btnExcluir = new JButton("Excluir");
 		btnExcluir.addActionListener(new ActionListener() {
@@ -141,10 +135,9 @@ public class ViewAluno extends JFrame {
 				if(jTProduto.getSelectedRow()!=-1){
 					JOptionPane.showMessageDialog(null, "Atenção ao alterar os dados");
 					
-					jTProduto.setValueAt(txtCPF.getText(), jTProduto.getSelectedRow(), 0);
-					jTProduto.setValueAt(txtNome.getText(), jTProduto.getSelectedRow(), 1);
-					jTProduto.setValueAt(txtCurso.getText(), jTProduto.getSelectedRow(), 2);
-					jTProduto.setValueAt(txtDataI.getText(), jTProduto.getSelectedRow(), 3);
+					jTProduto.setValueAt(txtNumDiscipl.getText(), jTProduto.getSelectedRow(), 0);
+					jTProduto.setValueAt(txtDNome.getText(), jTProduto.getSelectedRow(), 1);
+					jTProduto.setValueAt(txtDepto.getText(), jTProduto.getSelectedRow(), 2);
 					
 				}else{
 					JOptionPane.showMessageDialog(null, "Selecione um produto para atualizar");
@@ -155,15 +148,6 @@ public class ViewAluno extends JFrame {
 		});
 		btnAtualizar.setBounds(364, 114, 89, 23);
 		panel.add(btnAtualizar);
-		
-		JLabel lblDatai = new JLabel("Datai");
-		lblDatai.setBounds(467, 11, 46, 14);
-		panel.add(lblDatai);
-		
-		txtDataI = new JTextField();
-		txtDataI.setBounds(461, 36, 105, 20);
-		panel.add(txtDataI);
-		txtDataI.setColumns(10);
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBounds(10, 183, 770, 299);
@@ -178,10 +162,9 @@ public class ViewAluno extends JFrame {
 		jTProduto.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				txtCPF.setText(jTProduto.getValueAt(jTProduto.getSelectedRow(), 0).toString());
-				txtNome.setText(jTProduto.getValueAt(jTProduto.getSelectedRow(), 1).toString());
-				txtCurso.setText(jTProduto.getValueAt(jTProduto.getSelectedRow(), 2).toString());
-				txtDataI.setText(jTProduto.getValueAt(jTProduto.getSelectedRow(), 3).toString());
+				txtNumDiscipl.setText(jTProduto.getValueAt(jTProduto.getSelectedRow(), 0).toString());
+				txtDNome.setText(jTProduto.getValueAt(jTProduto.getSelectedRow(), 1).toString());
+				txtDepto.setText(jTProduto.getValueAt(jTProduto.getSelectedRow(), 2).toString());
 			}
 		});
 		scrollPane.setViewportView(jTProduto);
@@ -189,11 +172,11 @@ public class ViewAluno extends JFrame {
 			new Object[][] {
 			},
 			new String[] {
-				"CPF", "Nome", "Curso", "Datai"
+				"NumDiscipl", "Dnome", "Depto"
 			}
 		) {
 			boolean[] columnEditables = new boolean[] {
-				false, true, true, true
+				false, true, true
 			};
 			public boolean isCellEditable(int row, int column) {
 				return columnEditables[column];
@@ -201,5 +184,7 @@ public class ViewAluno extends JFrame {
 		});
 		DefaultTableModel modelo = (DefaultTableModel) jTProduto.getModel();
 		jTProduto.setRowSorter(new TableRowSorter<TableModel>(modelo));
-	}
+		
+	}	
+
 }

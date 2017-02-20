@@ -23,15 +23,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-
-public class ViewAluno extends JFrame {
+public class ViewMatricula extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField txtCPF;
-	private JTextField txtNome;
-	private JTextField txtCurso;
+	private JTextField txtDNumDiscipl;
+	private JTextField txtSemestre;
 	private JTable jTProduto;
-	private JTextField txtDataI;
+	private JTextField txtNota;
 
 	/**
 	 * Launch the application.
@@ -40,7 +39,7 @@ public class ViewAluno extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ViewAluno frame = new ViewAluno();
+					ViewMatricula frame = new ViewMatricula();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -52,18 +51,14 @@ public class ViewAluno extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public ViewAluno() {
-		setTitle("Tabela Aluno");
-		
-		//DefaultTableModel modelo = (DefaultTableModel) jTProduto.getModel();
-		//jTProduto.setRowSorter(new TableRowSorter<TableModel>(modelo));
-		
+	public ViewMatricula() {
+		setTitle("Tabela Matricula");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 806, 532);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		setContentPane(contentPane);
 		
 		JPanel panel = new JPanel();
 		panel.setBounds(10, 11, 770, 161);
@@ -75,7 +70,7 @@ public class ViewAluno extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				
 				DefaultTableModel dtmProdutos = (DefaultTableModel)jTProduto.getModel();
-				Object[] dados = {txtCPF.getText(),txtNome.getText(),txtCurso.getText(),txtDataI.getText()};
+				Object[] dados = {txtCPF.getText(),txtDNumDiscipl.getText(),txtSemestre.getText(),txtNota.getText()};
 				dtmProdutos.addRow(dados);
 			}
 		});
@@ -86,11 +81,11 @@ public class ViewAluno extends JFrame {
 		lblNewLabel.setBounds(20, 11, 84, 14);
 		panel.add(lblNewLabel);
 		
-		JLabel lblQtd = new JLabel("Nome");
-		lblQtd.setBounds(162, 11, 46, 14);
+		JLabel lblQtd = new JLabel("NumDiscipl");
+		lblQtd.setBounds(162, 11, 72, 14);
 		panel.add(lblQtd);
 		
-		JLabel lblNewLabel_1 = new JLabel("Curso");
+		JLabel lblNewLabel_1 = new JLabel("Semestre");
 		lblNewLabel_1.setBounds(304, 11, 46, 14);
 		panel.add(lblNewLabel_1);
 		
@@ -99,15 +94,15 @@ public class ViewAluno extends JFrame {
 		panel.add(txtCPF);
 		txtCPF.setColumns(10);
 		
-		txtNome = new JTextField();
-		txtNome.setBounds(162, 36, 122, 20);
-		panel.add(txtNome);
-		txtNome.setColumns(10);
+		txtDNumDiscipl = new JTextField();
+		txtDNumDiscipl.setBounds(162, 36, 122, 20);
+		panel.add(txtDNumDiscipl);
+		txtDNumDiscipl.setColumns(10);
 		
-		txtCurso = new JTextField();
-		txtCurso.setBounds(304, 36, 130, 20);
-		panel.add(txtCurso);
-		txtCurso.setColumns(10);
+		txtSemestre = new JTextField();
+		txtSemestre.setBounds(304, 36, 130, 20);
+		panel.add(txtSemestre);
+		txtSemestre.setColumns(10);
 		
 		JButton btnExcluir = new JButton("Excluir");
 		btnExcluir.addActionListener(new ActionListener() {
@@ -142,9 +137,9 @@ public class ViewAluno extends JFrame {
 					JOptionPane.showMessageDialog(null, "Atenção ao alterar os dados");
 					
 					jTProduto.setValueAt(txtCPF.getText(), jTProduto.getSelectedRow(), 0);
-					jTProduto.setValueAt(txtNome.getText(), jTProduto.getSelectedRow(), 1);
-					jTProduto.setValueAt(txtCurso.getText(), jTProduto.getSelectedRow(), 2);
-					jTProduto.setValueAt(txtDataI.getText(), jTProduto.getSelectedRow(), 3);
+					jTProduto.setValueAt(txtDNumDiscipl.getText(), jTProduto.getSelectedRow(), 1);
+					jTProduto.setValueAt(txtSemestre.getText(), jTProduto.getSelectedRow(), 2);
+					jTProduto.setValueAt(txtNota.getText(), jTProduto.getSelectedRow(), 3);
 					
 				}else{
 					JOptionPane.showMessageDialog(null, "Selecione um produto para atualizar");
@@ -156,14 +151,14 @@ public class ViewAluno extends JFrame {
 		btnAtualizar.setBounds(364, 114, 89, 23);
 		panel.add(btnAtualizar);
 		
-		JLabel lblDatai = new JLabel("Datai");
-		lblDatai.setBounds(467, 11, 46, 14);
-		panel.add(lblDatai);
+		JLabel lblNota = new JLabel("Nota");
+		lblNota.setBounds(473, 11, 46, 14);
+		panel.add(lblNota);
 		
-		txtDataI = new JTextField();
-		txtDataI.setBounds(461, 36, 105, 20);
-		panel.add(txtDataI);
-		txtDataI.setColumns(10);
+		txtNota = new JTextField();
+		txtNota.setBounds(467, 36, 86, 20);
+		panel.add(txtNota);
+		txtNota.setColumns(10);
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBounds(10, 183, 770, 299);
@@ -179,9 +174,9 @@ public class ViewAluno extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				txtCPF.setText(jTProduto.getValueAt(jTProduto.getSelectedRow(), 0).toString());
-				txtNome.setText(jTProduto.getValueAt(jTProduto.getSelectedRow(), 1).toString());
-				txtCurso.setText(jTProduto.getValueAt(jTProduto.getSelectedRow(), 2).toString());
-				txtDataI.setText(jTProduto.getValueAt(jTProduto.getSelectedRow(), 3).toString());
+				txtDNumDiscipl.setText(jTProduto.getValueAt(jTProduto.getSelectedRow(), 1).toString());
+				txtSemestre.setText(jTProduto.getValueAt(jTProduto.getSelectedRow(), 2).toString());
+				txtNota.setText(jTProduto.getValueAt(jTProduto.getSelectedRow(), 3).toString());
 			}
 		});
 		scrollPane.setViewportView(jTProduto);
@@ -189,11 +184,11 @@ public class ViewAluno extends JFrame {
 			new Object[][] {
 			},
 			new String[] {
-				"CPF", "Nome", "Curso", "Datai"
+				"CPF", "NumDiscipl", "Semestre", "Nota"
 			}
 		) {
 			boolean[] columnEditables = new boolean[] {
-				false, true, true, true
+				false, false, true, true
 			};
 			public boolean isCellEditable(int row, int column) {
 				return columnEditables[column];

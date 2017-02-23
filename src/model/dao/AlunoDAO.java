@@ -7,9 +7,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 
+import java.util.logging.Logger;//Atencao pacote diferente do import de Bruna
+
 import javax.swing.JOptionPane;
 
-import com.sun.istack.internal.logging.Logger;
+
 
 import connection.ConnectionFactory;
 import model.bean.Aluno;
@@ -22,11 +24,12 @@ public class AlunoDAO {
 		PreparedStatement stmt = null;
 		
 		try {
-			stmt = con.prepareStatement("INSERT INTO aluno (cpf, nome, curso, dataInicio)VALUES(?,?,?");
-			stmt.setString(1,a.getCpf());
+			stmt = con.prepareStatement("INSERT INTO ALUNO (cpf, nome, curso, dataI)VALUES(?,?,?,?);");
+			stmt.setInt(1,a.getCpf());
 			stmt.setString(2,a.getNome());
 			stmt.setString(3,a.getCurso());
-			stmt.setDate(4,a.getDataInicio());
+			//stmt.setDate(4,a.getDataInicio());
+			stmt.setString(4, a.getDataInicio());
 			
 			stmt.executeUpdate();
 			
@@ -54,10 +57,11 @@ public class AlunoDAO {
 				
 				Aluno aluno = new Aluno();
 				
-				aluno.setCpf(rs.getString("cpf"));
+				aluno.setCpf(rs.getInt("cpf"));
 				aluno.setNome(rs.getString("nome"));
 				aluno.setCurso(rs.getString("curso"));
-				aluno.setDataInicio(rs.getDate("dataInicio"));
+				//aluno.setDataInicio(rs.getDate("dataInicio"));
+				aluno.setDataInicio(rs.getString("dataInicio"));
 				alunos.add(aluno);	
 			}
 			

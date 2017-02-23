@@ -6,7 +6,7 @@ Create Table ALUNO(
 	CPF INTEGER not null,
     Nome VARCHAR(30),
     Curso VARCHAR(30),
-    DataI DATE,
+    DataI VARCHAR(30),
     
     PRIMARY KEY(CPF)
 )DEFAULT CHARSET utf8;

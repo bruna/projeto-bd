@@ -17,11 +17,16 @@ import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
+
+import model.bean.Aluno;
+import model.dao.AlunoDAO;
+
 import javax.swing.JScrollPane;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.Date;
 
 
 public class ViewAluno extends JFrame {
@@ -74,9 +79,18 @@ public class ViewAluno extends JFrame {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				DefaultTableModel dtmProdutos = (DefaultTableModel)jTProduto.getModel();
+				/*DefaultTableModel dtmProdutos = (DefaultTableModel)jTProduto.getModel();
 				Object[] dados = {txtCPF.getText(),txtNome.getText(),txtCurso.getText(),txtDataI.getText()};
-				dtmProdutos.addRow(dados);
+				dtmProdutos.addRow(dados);*/
+				
+				Aluno a = new Aluno();
+				AlunoDAO dao = new AlunoDAO();
+				a.setCpf(Integer.parseInt(txtCPF.getText()));
+				a.setNome(txtNome.getText());
+				a.setCurso(txtCurso.getText());
+				a.setDataInicio(txtDataI.getText());
+				
+				dao.create(a);
 			}
 		});
 		btnNewButton.setBounds(33, 114, 117, 23);

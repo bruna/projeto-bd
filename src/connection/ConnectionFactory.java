@@ -1,20 +1,20 @@
 package connection;
 
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
-
-import com.sun.istack.internal.logging.Logger;
+import java.util.logging.Logger;
 
 public class ConnectionFactory {
 	
 	private static final String DRIVER = "com.mysql.jdbc.Driver";
-	private static final String URL = "jdbc:mysql://localhost:3306/dbminisiga";
+	private static final String URL = "jdbc:mysql://localhost:1886/minisiga_fdb";
 	private static final String USER = "root";
-	private static final String PASS = "";
+	private static final String PASS = "6192";
 	
 	public static Connection getConnection(){
 		try {
@@ -32,9 +32,10 @@ public class ConnectionFactory {
 			con.close();
 			} 
 		} catch (SQLException ex) {
-			Logger.getLogger(ConnectionFactory.class.getName(), null).log(Level.SEVERE, null, ex);
+			Logger.getLogger(ConnectionFactory.class.getName(), null).log(Level.SEVERE,null,ex);
 		}
-	}
+			
+		}
 		
 		public static void closeConnection(Connection con, PreparedStatement stmt){
 			

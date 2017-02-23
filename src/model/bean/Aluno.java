@@ -1,17 +1,17 @@
 package model.bean;
 
-import java.sql.Date;
+//import java.sql.Date;
 
 public class Aluno {
 
-	private String cpf;
+	private int cpf;
 	private String nome;
 	private String curso;
-	private Date dataInicio;
-	public String getCpf() {
+	private String dataInicio;
+	public int getCpf() {
 		return cpf;
 	}
-	public void setCpf(String cpf) {
+	public void setCpf(int cpf) {
 		this.cpf = cpf;
 	}
 	public String getNome() {
@@ -26,11 +26,18 @@ public class Aluno {
 	public void setCurso(String curso) {
 		this.curso = curso;
 	}
-	public Date getDataInicio() {
+	public String getDataInicio() {
 		return dataInicio;
 	}
-	public void setDataInicio(Date dataInicio) {
+	public void setDataInicio(String dataInicio) {
 		this.dataInicio = dataInicio;
 	}
 	
+	
+	/*public void setDataInicio(Date dataInicio){
+		this.dataInicio = dataInicio;
+	}
+	public void getDataInicio(){
+		return dataInicio;
+	}*/
 }

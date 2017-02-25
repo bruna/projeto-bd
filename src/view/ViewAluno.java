@@ -85,7 +85,7 @@ public class ViewAluno extends JFrame {
 				
 				Aluno a = new Aluno();
 				AlunoDAO dao = new AlunoDAO();
-				a.setCpf(Integer.parseInt(txtCPF.getText()));
+				a.setCpf(txtCPF.getText());
 				a.setNome(txtNome.getText());
 				a.setCurso(txtCurso.getText());
 				a.setDataInicio(txtDataI.getText());
@@ -153,7 +153,7 @@ public class ViewAluno extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				
 				if(jTProduto.getSelectedRow()!=-1){
-					JOptionPane.showMessageDialog(null, "Atenção ao alterar os dados");
+					JOptionPane.showMessageDialog(null, "Atenï¿½ï¿½o ao alterar os dados");
 					
 					jTProduto.setValueAt(txtCPF.getText(), jTProduto.getSelectedRow(), 0);
 					jTProduto.setValueAt(txtNome.getText(), jTProduto.getSelectedRow(), 1);

@@ -4,14 +4,14 @@ package model.bean;
 
 public class Aluno {
 
-	private int cpf;
+	private String cpf;
 	private String nome;
 	private String curso;
 	private String dataInicio;
-	public int getCpf() {
+	public String getCpf() {
 		return cpf;
 	}
-	public void setCpf(int cpf) {
+	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
 	public String getNome() {

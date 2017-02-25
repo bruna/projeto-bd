@@ -25,7 +25,7 @@ public class AlunoDAO {
 		
 		try {
 			stmt = con.prepareStatement("INSERT INTO ALUNO (cpf, nome, curso, dataI)VALUES(?,?,?,?);");
-			stmt.setInt(1,a.getCpf());
+			stmt.setString(1,a.getCpf());
 			stmt.setString(2,a.getNome());
 			stmt.setString(3,a.getCurso());
 			//stmt.setDate(4,a.getDataInicio());
@@ -57,7 +57,7 @@ public class AlunoDAO {
 				
 				Aluno aluno = new Aluno();
 				
-				aluno.setCpf(rs.getInt("cpf"));
+				aluno.setCpf(rs.getString("cpf"));
 				aluno.setNome(rs.getString("nome"));
 				aluno.setCurso(rs.getString("curso"));
 				//aluno.setDataInicio(rs.getDate("dataInicio"));

@@ -9,23 +9,22 @@ import java.util.logging.Level;
 import java.util.logging.Logger;//Atencao pacote diferente do import de Bruna
 import javax.swing.JOptionPane;
 import connection.ConnectionFactory;
-import model.bean.Aluno;
+import model.bean.Livro;
 
-public class AlunoDAO {
+public class LivroDAO {
 	
-	public void create(Aluno a){
-		
+	public void create(Livro l){
 		Connection con = ConnectionFactory.getConnection();
 		PreparedStatement stmt = null;
 		
 		try {
-			stmt = con.prepareStatement("INSERT INTO ALUNO (cpf, nome, curso, dataI)VALUES(?,?,?,?);");
-			//stmt = con.prepareStatement("INSERT INTO ALUNO (cpf, nome, curso, dataInicio)VALUES(?,?,?,?);");
-			stmt.setString(1,a.getCpf());
-			stmt.setString(2,a.getNome());
-			stmt.setString(3,a.getCurso());
-			//stmt.setDate(4,a.getDataInicio());
-			stmt.setString(4, a.getDataInicio());
+			stmt = con.prepareStatement("INSERT INTO LIVRO (ISBNLivro,TituloLivro,Editora,Edicao,Autor)"
+					+ "VALUES(?,?,?,?,?);");
+			stmt.setString(1,l.getISBNLivro());
+			stmt.setString(2,l.getTituloLivro());
+			stmt.setString(3,l.getEditora());
+			stmt.setString(4,l.getEdicao());
+			stmt.setString(5,l.getAutor());
 			
 			stmt.executeUpdate();
 			
@@ -37,35 +36,37 @@ public class AlunoDAO {
 		}
 	}
 	
-	public List<Aluno> read(){
-		
+	public List<Livro> read(){
 		Connection con = ConnectionFactory.getConnection();
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
 		
-		List<Aluno> alunos = new ArrayList<>();
+		List<Livro> livros = new ArrayList<>();
 		
 		try {
-			stmt = con.prepareStatement("SELECT * FROM aluno");
+			stmt = con.prepareStatement("SELECT * FROM Livro");
 			rs = stmt.executeQuery();
 			
 			while (rs.next()){
 				
-				Aluno aluno = new Aluno();
+				Livro livro = new Livro();
 				
-				aluno.setCpf(rs.getString("cpf"));
-				aluno.setNome(rs.getString("nome"));
-				aluno.setCurso(rs.getString("curso"));
-				//aluno.setDataInicio(rs.getDate("dataInicio"));
-				aluno.setDataInicio(rs.getString("dataI"));
-				alunos.add(aluno);	
+				livro.setISBNLivro(rs.getString("ISBNLivro"));
+				livro.setTituloLivro(rs.getString("TituloLivro"));
+				livro.setEditora(rs.getString("Editora"));
+				livro.setEdicao(rs.getString("Edicao"));
+				livro.setAutor(rs.getString("Autor"));
+				
+				livros.add(livro);	
 			}
 			
 		} catch (SQLException ex) {
-			Logger.getLogger(AlunoDAO.class.getName(), null).log(Level.SEVERE, null, ex);
+			Logger.getLogger(LivroDAO.class.getName(), null).log(Level.SEVERE, null, ex);
 		}finally{
 			ConnectionFactory.closeConnection(con, stmt, rs);
 		}
-		return alunos;
+		return livros;
+		
 	}
+
 }

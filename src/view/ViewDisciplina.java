@@ -17,6 +17,12 @@ import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
+
+import model.bean.Aluno;
+import model.bean.Disciplina;
+import model.dao.AlunoDAO;
+import model.dao.DisciplinaDAO;
+
 import javax.swing.JScrollPane;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -68,9 +74,23 @@ public class ViewDisciplina extends JFrame {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				DefaultTableModel dtmProdutos = (DefaultTableModel)jTProduto.getModel();
+				/*DefaultTableModel dtmProdutos = (DefaultTableModel)jTProduto.getModel();
 				Object[] dados = {txtNumDiscipl.getText(),txtDNome.getText(),txtDepto.getText()};
-				dtmProdutos.addRow(dados);
+				dtmProdutos.addRow(dados);*/
+				
+				Disciplina d = new Disciplina();
+				DisciplinaDAO ddao = new DisciplinaDAO();
+				d.setNumDiscipl(txtNumDiscipl.getText());
+				d.setDnome(txtDNome.getText());
+				d.setDepto(txtDepto.getText());
+				
+				ddao.create(d);
+				
+				txtNumDiscipl.setText("");
+				txtDNome.setText("");
+				txtDepto.setText("");
+				
+				readJTable();
 			}
 		});
 		btnNewButton.setBounds(33, 114, 117, 23);
@@ -185,6 +205,23 @@ public class ViewDisciplina extends JFrame {
 		DefaultTableModel modelo = (DefaultTableModel) jTProduto.getModel();
 		jTProduto.setRowSorter(new TableRowSorter<TableModel>(modelo));
 		
+		readJTable();
 	}	
 
+	public void readJTable() {
+		DefaultTableModel modelo = (DefaultTableModel) jTProduto.getModel();
+		modelo.setNumRows(0);
+		DisciplinaDAO ddao = new DisciplinaDAO();
+		
+		for(Disciplina d:ddao.read()){
+			
+			modelo.addRow(new Object[]{
+					d.getNumDiscipl(),
+					d.getDnome(),
+					d.getDepto()
+			});
+			
+		}
+		
+	}
 }

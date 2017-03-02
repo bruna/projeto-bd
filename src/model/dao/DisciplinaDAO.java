@@ -9,23 +9,20 @@ import java.util.logging.Level;
 import java.util.logging.Logger;//Atencao pacote diferente do import de Bruna
 import javax.swing.JOptionPane;
 import connection.ConnectionFactory;
-import model.bean.Aluno;
+import model.bean.Disciplina;
 
-public class AlunoDAO {
+public class DisciplinaDAO {
 	
-	public void create(Aluno a){
-		
+	public void create(Disciplina d){
 		Connection con = ConnectionFactory.getConnection();
 		PreparedStatement stmt = null;
 		
 		try {
-			stmt = con.prepareStatement("INSERT INTO ALUNO (cpf, nome, curso, dataI)VALUES(?,?,?,?);");
-			//stmt = con.prepareStatement("INSERT INTO ALUNO (cpf, nome, curso, dataInicio)VALUES(?,?,?,?);");
-			stmt.setString(1,a.getCpf());
-			stmt.setString(2,a.getNome());
-			stmt.setString(3,a.getCurso());
-			//stmt.setDate(4,a.getDataInicio());
-			stmt.setString(4, a.getDataInicio());
+			stmt = con.prepareStatement("INSERT INTO DISCIPLINA (numDiscipl, dnome, depto)VALUES(?,?,?);");
+			//stmt = con.prepareStatement("INSERT INTO DISCIPLINA (numDiscipl, dnome, depto)VALUES(?,?,?);");
+			stmt.setString(1,d.getNumDiscipl());
+			stmt.setString(2,d.getDnome());
+			stmt.setString(3,d.getDepto());
 			
 			stmt.executeUpdate();
 			
@@ -37,35 +34,35 @@ public class AlunoDAO {
 		}
 	}
 	
-	public List<Aluno> read(){
+public List<Disciplina> read(){
 		
 		Connection con = ConnectionFactory.getConnection();
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
 		
-		List<Aluno> alunos = new ArrayList<>();
+		List<Disciplina> disciplinas = new ArrayList<>();
 		
 		try {
-			stmt = con.prepareStatement("SELECT * FROM aluno");
+			stmt = con.prepareStatement("SELECT * FROM disciplina");
 			rs = stmt.executeQuery();
 			
 			while (rs.next()){
 				
-				Aluno aluno = new Aluno();
+				Disciplina disciplina = new Disciplina();
 				
-				aluno.setCpf(rs.getString("cpf"));
-				aluno.setNome(rs.getString("nome"));
-				aluno.setCurso(rs.getString("curso"));
-				//aluno.setDataInicio(rs.getDate("dataInicio"));
-				aluno.setDataInicio(rs.getString("dataI"));
-				alunos.add(aluno);	
+				disciplina.setNumDiscipl(rs.getString("numdiscipl"));
+				disciplina.setDnome(rs.getString("dnome"));
+				disciplina.setDepto(rs.getString("depto"));
+				
+				disciplinas.add(disciplina);	
 			}
 			
 		} catch (SQLException ex) {
-			Logger.getLogger(AlunoDAO.class.getName(), null).log(Level.SEVERE, null, ex);
+			Logger.getLogger(DisciplinaDAO.class.getName(), null).log(Level.SEVERE, null, ex);
 		}finally{
 			ConnectionFactory.closeConnection(con, stmt, rs);
 		}
-		return alunos;
+		return disciplinas;
 	}
+
 }

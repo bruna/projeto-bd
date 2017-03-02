@@ -17,6 +17,10 @@ import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
+
+import model.bean.Matricula;
+import model.dao.MatriculaDAO;
+
 import javax.swing.JScrollPane;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -69,9 +73,20 @@ public class ViewMatricula extends JFrame {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				DefaultTableModel dtmProdutos = (DefaultTableModel)jTProduto.getModel();
+				/*DefaultTableModel dtmProdutos = (DefaultTableModel)jTProduto.getModel();
 				Object[] dados = {txtCPF.getText(),txtDNumDiscipl.getText(),txtSemestre.getText(),txtNota.getText()};
-				dtmProdutos.addRow(dados);
+				dtmProdutos.addRow(dados);*/
+				
+				Matricula m = new Matricula();
+				MatriculaDAO mdao = new MatriculaDAO();
+				m.setCPF(txtCPF.getText());
+				m.setNumDiscipl(txtDNumDiscipl.getText());
+				m.setSemestre(txtSemestre.getText());
+				m.setNota(txtNota.getText());
+				
+				mdao.create(m);
+								
+				readJTable();
 			}
 		});
 		btnNewButton.setBounds(33, 114, 117, 23);
@@ -86,7 +101,7 @@ public class ViewMatricula extends JFrame {
 		panel.add(lblQtd);
 		
 		JLabel lblNewLabel_1 = new JLabel("Semestre");
-		lblNewLabel_1.setBounds(304, 11, 46, 14);
+		lblNewLabel_1.setBounds(304, 11, 55, 14);
 		panel.add(lblNewLabel_1);
 		
 		txtCPF = new JTextField();
@@ -196,5 +211,25 @@ public class ViewMatricula extends JFrame {
 		});
 		DefaultTableModel modelo = (DefaultTableModel) jTProduto.getModel();
 		jTProduto.setRowSorter(new TableRowSorter<TableModel>(modelo));
+		
+		readJTable();
+	}
+	
+	public void readJTable() {
+		DefaultTableModel modelo = (DefaultTableModel) jTProduto.getModel();
+		modelo.setNumRows(0);
+		MatriculaDAO mdao = new MatriculaDAO();
+		
+		for(Matricula m:mdao.read()){
+			
+			modelo.addRow(new Object[]{
+					m.getCPF(),
+					m.getNumDiscipl(),
+					m.getSemestre(),
+					m.getNota()
+			});
+			
+		}
+		
 	}
 }

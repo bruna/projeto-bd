@@ -25,9 +25,4 @@ public class Disciplina {
 	public void setDepto(String depto) {
 		this.depto = depto;
 	}
-	
-	
-	
-	
-
 }

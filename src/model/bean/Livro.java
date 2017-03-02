@@ -1,16 +1,16 @@
 package model.bean;
 
 public class Livro {
-	private int iSBNLivro;
+	private String iSBNLivro;
 	private String tituloLivro;
 	private String editora;
-	private int edicao;
+	private String edicao;
 	private String autor;
 	
-	public int getISBNLivro() {
+	public String getISBNLivro() {
 		return iSBNLivro;
 	}
-	public void setISBNLivro(int newisbnlivro) {
+	public void setISBNLivro(String newisbnlivro) {
 		iSBNLivro = newisbnlivro;
 	}
 	public String getTituloLivro() {
@@ -25,10 +25,10 @@ public class Livro {
 	public void setEditora(String neweditora) {
 		editora = neweditora;
 	}
-	public int getEdicao() {
+	public String getEdicao() {
 		return edicao;
 	}
-	public void setEdicao(int newedicao) {
+	public void setEdicao(String newedicao) {
 		edicao = newedicao;
 	}
 	public String getAutor() {

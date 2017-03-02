@@ -12,7 +12,7 @@ import java.util.logging.Logger;
 public class ConnectionFactory {
 	
 	private static final String DRIVER = "com.mysql.jdbc.Driver";
-	private static final String URL = "jdbc:mysql://localhost:1886/minisiga_fdb"; 
+	private static final String URL = "jdbc:mysql://localhost:1886/minisiga_fdb?autoReconnect=true&useSSL=false"; 
 	//private static final String URL = "jdbc:mysql://localhost:3306/MiniSiga_FDB?autoReconnect=true&useSSL=false";
 	private static final String USER = "root";
 	private static final String PASS = "6192";

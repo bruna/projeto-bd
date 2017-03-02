@@ -18,6 +18,12 @@ import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
+
+import model.bean.Aluno;
+import model.bean.LivroAdotado;
+import model.dao.AlunoDAO;
+import model.dao.LivroAdotadoDAO;
+
 import javax.swing.JScrollPane;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -71,9 +77,19 @@ public class ViewLivroAdotado extends JFrame {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				DefaultTableModel dtmProdutos = (DefaultTableModel)jTProduto.getModel();
+				/*DefaultTableModel dtmProdutos = (DefaultTableModel)jTProduto.getModel();
 				Object[] dados = {txtNumDiscipl.getText(),txtSemestre.getText(),txtISBNLivro.getText()};
-				dtmProdutos.addRow(dados);
+				dtmProdutos.addRow(dados);*/
+				
+				LivroAdotado la = new LivroAdotado();
+				LivroAdotadoDAO ladao = new LivroAdotadoDAO();
+				la.setNumDiscipl(txtNumDiscipl.getText());
+				la.setSemestre(txtSemestre.getText());
+				la.setISBNLivro(txtISBNLivro.getText());
+				
+				ladao.create(la);
+				
+				readJTable();
 			}
 		});
 		btnNewButton.setBounds(33, 114, 117, 23);
@@ -84,11 +100,11 @@ public class ViewLivroAdotado extends JFrame {
 		panel.add(lblNewLabel);
 		
 		JLabel lblQtd = new JLabel("Semestre");
-		lblQtd.setBounds(162, 11, 46, 14);
+		lblQtd.setBounds(162, 11, 64, 14);
 		panel.add(lblQtd);
 		
 		JLabel lblNewLabel_1 = new JLabel("ISBNLivro");
-		lblNewLabel_1.setBounds(304, 11, 46, 14);
+		lblNewLabel_1.setBounds(304, 11, 71, 14);
 		panel.add(lblNewLabel_1);
 		
 		txtNumDiscipl = new JTextField();
@@ -187,6 +203,25 @@ public class ViewLivroAdotado extends JFrame {
 		});
 		DefaultTableModel modelo = (DefaultTableModel) jTProduto.getModel();
 		jTProduto.setRowSorter(new TableRowSorter<TableModel>(modelo));
+		
+		readJTable();
+	}
+	
+	public void readJTable() {
+		DefaultTableModel modelo = (DefaultTableModel) jTProduto.getModel();
+		modelo.setNumRows(0);
+		LivroAdotadoDAO ladao = new LivroAdotadoDAO();
+		
+		for(LivroAdotado la:ladao.read()){
+			
+			modelo.addRow(new Object[]{
+					la.getNumDiscipl(),
+					la.getSemestre(),
+					la.getISBNLivro()
+			});
+			
+		}
+		
 	}
 }
 

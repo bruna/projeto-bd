@@ -17,6 +17,12 @@ import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
+
+import model.bean.Disciplina;
+import model.bean.Livro;
+import model.dao.DisciplinaDAO;
+import model.dao.LivroDAO;
+
 import javax.swing.JScrollPane;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -70,10 +76,28 @@ public class ViewLivro extends JFrame {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				DefaultTableModel dtmProdutos = (DefaultTableModel)jTProduto.getModel();
+				/*DefaultTableModel dtmProdutos = (DefaultTableModel)jTProduto.getModel();
 				Object[] dados = {txtISBNLivro.getText(),txtTituloLivro.getText(),txtEditora.getText(),
 						txtEdicao.getText(),txtAutor.getText()};
-				dtmProdutos.addRow(dados);
+				dtmProdutos.addRow(dados);*/
+				
+				Livro l = new Livro();
+				LivroDAO ldao = new LivroDAO();
+				l.setISBNLivro(txtISBNLivro.getText());
+				l.setTituloLivro(txtTituloLivro.getText());
+				l.setEditora(txtEditora.getText());
+				l.setEdicao(txtEdicao.getText());
+				l.setAutor(txtAutor.getText());
+				
+				ldao.create(l);
+				
+				txtISBNLivro.setText("");
+				txtTituloLivro.setText("");
+				txtEditora.setText("");
+				txtEdicao.setText("");
+				txtAutor.setText("");
+				
+				readJTable();
 			}
 		});
 		btnNewButton.setBounds(33, 114, 117, 23);
@@ -209,5 +233,27 @@ public class ViewLivro extends JFrame {
 		});
 		DefaultTableModel modelo = (DefaultTableModel) jTProduto.getModel();
 		jTProduto.setRowSorter(new TableRowSorter<TableModel>(modelo));
+		
+		readJTable();
+	}
+	
+	
+	public void readJTable() {
+		DefaultTableModel modelo = (DefaultTableModel) jTProduto.getModel();
+		modelo.setNumRows(0);
+		LivroDAO ldao = new LivroDAO();
+		
+		for(Livro l:ldao.read()){
+			
+			modelo.addRow(new Object[]{
+					l.getISBNLivro(),
+					l.getTituloLivro(),
+					l.getEditora(),
+					l.getEdicao(),
+					l.getAutor()
+			});
+			
+		}
+		
 	}
 }

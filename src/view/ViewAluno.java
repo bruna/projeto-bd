@@ -91,6 +91,13 @@ public class ViewAluno extends JFrame {
 				a.setDataInicio(txtDataI.getText());
 				
 				dao.create(a);
+				
+				txtCPF.setText("");
+				txtNome.setText("");
+				txtCurso.setText("");
+				txtDataI.setText("");
+				
+				readJTable();
 			}
 		});
 		btnNewButton.setBounds(33, 114, 117, 23);
@@ -144,9 +151,6 @@ public class ViewAluno extends JFrame {
 		panel.add(btnExcluir);
 		
 		JButton btnAtualizar = new JButton("Atualizar");
-		
-		
-		
 		
 		btnAtualizar.addActionListener(new ActionListener() {
 			
@@ -215,5 +219,26 @@ public class ViewAluno extends JFrame {
 		});
 		DefaultTableModel modelo = (DefaultTableModel) jTProduto.getModel();
 		jTProduto.setRowSorter(new TableRowSorter<TableModel>(modelo));
+		
+		readJTable();
+	}
+	
+
+	public void readJTable() {
+		DefaultTableModel modelo = (DefaultTableModel) jTProduto.getModel();
+		modelo.setNumRows(0);
+		AlunoDAO adao = new AlunoDAO();
+		
+		for(Aluno a:adao.read()){
+			
+			modelo.addRow(new Object[]{
+					a.getCpf(),
+					a.getNome(),
+					a.getCurso(),
+					a.getDataInicio()
+			});
+			
+		}
+		
 	}
 }

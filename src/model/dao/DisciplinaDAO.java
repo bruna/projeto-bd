@@ -9,6 +9,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;//Atencao pacote diferente do import de Bruna
 import javax.swing.JOptionPane;
 import connection.ConnectionFactory;
+import model.bean.Aluno;
 import model.bean.Disciplina;
 
 public class DisciplinaDAO {
@@ -19,7 +20,6 @@ public class DisciplinaDAO {
 		
 		try {
 			stmt = con.prepareStatement("INSERT INTO DISCIPLINA (numDiscipl, dnome, depto)VALUES(?,?,?);");
-			//stmt = con.prepareStatement("INSERT INTO DISCIPLINA (numDiscipl, dnome, depto)VALUES(?,?,?);");
 			stmt.setString(1,d.getNumDiscipl());
 			stmt.setString(2,d.getDnome());
 			stmt.setString(3,d.getDepto());
@@ -43,7 +43,7 @@ public List<Disciplina> read(){
 		List<Disciplina> disciplinas = new ArrayList<>();
 		
 		try {
-			stmt = con.prepareStatement("SELECT * FROM disciplina");
+			stmt = con.prepareStatement("SELECT * FROM DISCIPLINA");
 			rs = stmt.executeQuery();
 			
 			while (rs.next()){
@@ -65,4 +65,25 @@ public List<Disciplina> read(){
 		return disciplinas;
 	}
 
+public void update(Disciplina d){
+	
+	Connection con = ConnectionFactory.getConnection();
+	PreparedStatement stmt = null;
+	
+	try {
+		stmt = con.prepareStatement("UPDATE DISCIPLINA SET numDiscipl = ?, dnome = ?, depto = ? WHERE numDiscipl = ?");
+		stmt.setString(1,d.getNumDiscipl());
+		stmt.setString(2,d.getDnome());
+		stmt.setString(3,d.getDepto());
+		stmt.setString(4,d.getNumDiscipl());
+		
+		stmt.executeUpdate();
+		
+		JOptionPane.showMessageDialog(null, "Atualizado com sucesso!");	
+	} catch (SQLException ex) {
+		JOptionPane.showMessageDialog(null, "Erro ao atualizar: "+ex);
+	}finally{
+		ConnectionFactory.closeConnection(con, stmt);
+	}
+}
 }

@@ -46,7 +46,7 @@ public class AlunoDAO {
 		List<Aluno> alunos = new ArrayList<>();
 		
 		try {
-			stmt = con.prepareStatement("SELECT * FROM aluno");
+			stmt = con.prepareStatement("SELECT * FROM ALUNO");
 			rs = stmt.executeQuery();
 			
 			while (rs.next()){
@@ -67,5 +67,28 @@ public class AlunoDAO {
 			ConnectionFactory.closeConnection(con, stmt, rs);
 		}
 		return alunos;
+	}
+	
+public void update(Aluno a){
+		
+		Connection con = ConnectionFactory.getConnection();
+		PreparedStatement stmt = null;
+		
+		try {
+			stmt = con.prepareStatement("UPDATE ALUNO SET cpf = ?, nome = ?, curso = ?, dataI = ? WHERE cpf = ?");
+			stmt.setString(1,a.getCpf());
+			stmt.setString(2,a.getNome());
+			stmt.setString(3,a.getCurso());
+			stmt.setString(4, a.getDataInicio());
+			stmt.setString(5,a.getCpf());
+			
+			stmt.executeUpdate();
+			
+			JOptionPane.showMessageDialog(null, "Atualizado com sucesso!");	
+		} catch (SQLException ex) {
+			JOptionPane.showMessageDialog(null, "Erro ao atualizar: "+ex);
+		}finally{
+			ConnectionFactory.closeConnection(con, stmt);
+		}
 	}
 }

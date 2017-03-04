@@ -27,6 +27,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.Date;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 
 public class ViewAluno extends JFrame {
@@ -71,6 +73,21 @@ public class ViewAluno extends JFrame {
 		contentPane.setLayout(null);
 		
 		JPanel panel = new JPanel();
+		panel.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				
+				if(jTProduto.getSelectedRow() != 1) {
+					
+					jTProduto.setValueAt(txtCPF.getText(), jTProduto.getSelectedRow(), 0);
+					jTProduto.setValueAt(txtNome.getText(), jTProduto.getSelectedRow(), 1);
+					jTProduto.setValueAt(txtCurso.getText(), jTProduto.getSelectedRow(), 2);
+					jTProduto.setValueAt(txtDataI.getText(), jTProduto.getSelectedRow(), 3);
+					
+				}
+					
+			}
+		});
 		panel.setBounds(10, 11, 770, 161);
 		contentPane.add(panel);
 		panel.setLayout(null);
@@ -140,7 +157,7 @@ public class ViewAluno extends JFrame {
 					dtmProdutos.removeRow(jTProduto.getSelectedRow());
 					//System.out.println("Linha selecionada: "+jTProduto.getSelectedRow());
 				}else{
-					JOptionPane.showMessageDialog(null, "Selecione um produto para excluir");
+					JOptionPane.showMessageDialog(null, "Selecione um aluno para excluir");
 				}
 				
 				
@@ -151,27 +168,37 @@ public class ViewAluno extends JFrame {
 		panel.add(btnExcluir);
 		
 		JButton btnAtualizar = new JButton("Atualizar");
-		
 		btnAtualizar.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
 				
 				if(jTProduto.getSelectedRow()!=-1){
-					JOptionPane.showMessageDialog(null, "Aten��o ao alterar os dados");
+		
+					Aluno a = new Aluno();
+					AlunoDAO dao = new AlunoDAO();
 					
-					jTProduto.setValueAt(txtCPF.getText(), jTProduto.getSelectedRow(), 0);
-					jTProduto.setValueAt(txtNome.getText(), jTProduto.getSelectedRow(), 1);
-					jTProduto.setValueAt(txtCurso.getText(), jTProduto.getSelectedRow(), 2);
-					jTProduto.setValueAt(txtDataI.getText(), jTProduto.getSelectedRow(), 3);
+					a.setCpf(txtCPF.getText());
+					a.setNome(txtNome.getText());
+					a.setCurso(txtCurso.getText());
+					a.setDataInicio(txtDataI.getText());
+					
+					dao.update(a);
+					
+					txtCPF.setText("");
+					txtNome.setText("");
+					txtCurso.setText("");
+					txtDataI.setText("");
+					
+					readJTable();
 					
 				}else{
-					JOptionPane.showMessageDialog(null, "Selecione um produto para atualizar");
+					JOptionPane.showMessageDialog(null, "Selecione um aluno para atualizar");
 				}
 				
 				
 			}
 		});
-		btnAtualizar.setBounds(364, 114, 89, 23);
+		btnAtualizar.setBounds(364, 114, 117, 23);
 		panel.add(btnAtualizar);
 		
 		JLabel lblDatai = new JLabel("Datai");

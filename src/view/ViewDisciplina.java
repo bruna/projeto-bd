@@ -144,25 +144,30 @@ public class ViewDisciplina extends JFrame {
 		panel.add(btnExcluir);
 		
 		JButton btnAtualizar = new JButton("Atualizar");
-		
-		
-		
-		
 		btnAtualizar.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
 				
 				if(jTProduto.getSelectedRow()!=-1){
-					JOptionPane.showMessageDialog(null, "Atenção ao alterar os dados");
 					
-					jTProduto.setValueAt(txtNumDiscipl.getText(), jTProduto.getSelectedRow(), 0);
-					jTProduto.setValueAt(txtDNome.getText(), jTProduto.getSelectedRow(), 1);
-					jTProduto.setValueAt(txtDepto.getText(), jTProduto.getSelectedRow(), 2);
+					Disciplina d = new Disciplina();
+					DisciplinaDAO ddao = new DisciplinaDAO();
+					
+					d.setNumDiscipl(txtNumDiscipl.getText());
+					d.setDnome(txtDNome.getText());
+					d.setDepto(txtDepto.getText());
+					
+					ddao.update(d);
+					
+					txtNumDiscipl.setText("");
+					txtDNome.setText("");
+					txtDepto.setText("");
+					
+					readJTable();
 					
 				}else{
-					JOptionPane.showMessageDialog(null, "Selecione um produto para atualizar");
+					JOptionPane.showMessageDialog(null, "Selecione uma disciplina para atualizar");
 				}
-				
 				
 			}
 		});

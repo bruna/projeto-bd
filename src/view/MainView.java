@@ -71,7 +71,7 @@ public class MainView extends JFrame {
 		contentPane.add(btnLivro);
 		
 		JLabel lblEscolhaATabela = new JLabel("Escolha a tabela que deseja acessar.");
-		lblEscolhaATabela.setBounds(10, 37, 224, 14);
+		lblEscolhaATabela.setBounds(10, 37, 438, 23);
 		contentPane.add(lblEscolhaATabela);
 		
 		JButton btnMatricula = new JButton("Matricula");

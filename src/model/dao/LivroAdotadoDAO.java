@@ -12,6 +12,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 import connection.ConnectionFactory;
+import model.bean.Disciplina;
 import model.bean.LivroAdotado;
 
 public class LivroAdotadoDAO {
@@ -69,4 +70,25 @@ public List<LivroAdotado> read(){
 		return las;
 	}
 
+public void update(LivroAdotado la){
+	
+	Connection con = ConnectionFactory.getConnection();
+	PreparedStatement stmt = null;
+	
+	try {
+		stmt = con.prepareStatement("UPDATE LivroAdotado SET numDiscipl = ?, Semestre = ?, ISBNLivro = ? WHERE numDiscipl = ?");
+		stmt.setString(1,la.getNumDiscipl());
+		stmt.setString(2,la.getSemestre());
+		stmt.setString(3,la.getISBNLivro());
+		stmt.setString(4,la.getNumDiscipl());
+		
+		stmt.executeUpdate();
+		
+		JOptionPane.showMessageDialog(null, "Atualizado com sucesso!");	
+	} catch (SQLException ex) {
+		JOptionPane.showMessageDialog(null, "Erro ao atualizar: "+ex);
+	}finally{
+		ConnectionFactory.closeConnection(con, stmt);
+	}
+}
 }

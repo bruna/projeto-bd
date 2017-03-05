@@ -3,17 +3,17 @@ CREATE SCHEMA MiniSiga_FDB;
 use MiniSiga_FDB;
 
 Create Table ALUNO(
-	CPF INTEGER not null,
+	CPF VARCHAR(11) not null,
     Nome VARCHAR(30),
     Curso VARCHAR(30),
-    DataI VARCHAR(30),
+    DataI VARCHAR(10),
     
     PRIMARY KEY(CPF)
 )DEFAULT CHARSET utf8;
 
 
 Create Table DISCIPLINA(
-	NumDiscipl INTEGER not null,
+	NumDiscipl VARCHAR(5) not null,
     Dnome VARCHAR(30),
     Depto VARCHAR(30),
     
@@ -21,10 +21,10 @@ Create Table DISCIPLINA(
 )DEFAULT CHARSET utf8;
 
 Create Table MATRICULA(
-	CPF INTEGER not null,
-    NumDiscipl INTEGER not null,
+	CPF VARCHAR(11) not null,
+    NumDiscipl VARCHAR(5) not null,
     Semestre VARCHAR(30) not null,
-    Nota INTEGER,
+    Nota FLOAT,
     
     PRIMARY KEY(Semestre),
     FOREIGN KEY (CPF) REFERENCES ALUNO(CPF)
@@ -37,10 +37,10 @@ Create Table MATRICULA(
 )DEFAULT CHARSET utf8;
 
 Create Table LIVRO(
-	ISBNLivro INTEGER not null,
+	ISBNLivro VARCHAR(10) not null,
     TituloLivro VARCHAR(30),
     Editora VARCHAR(30),
-    Edicao INTEGER,
+    Edicao VARCHAR(10),
     Autor VARCHAR(30),
     
     PRIMARY KEY (ISBNLivro)
@@ -48,9 +48,9 @@ Create Table LIVRO(
     
 
 Create Table LivroAdotado(
-	NumDiscipl INTEGER not null,
+	NumDiscipl VARCHAR(5) not null,
     Semestre VARCHAR(30) not null,
-    ISBNLivro INTEGER,
+    ISBNLivro VARCHAR(10),
     
     FOREIGN KEY (NumDiscipl) REFERENCES DISCIPLINA(NumDiscipl)
 		ON DELETE CASCADE

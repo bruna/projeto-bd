@@ -35,7 +35,7 @@ public class MainView extends JFrame {
 	 * Create the frame.
 	 */
 	public MainView() {
-		setTitle("MiniSiga UFRPE xD");
+		setTitle("MiniSiga UFRPE");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 564, 264);
 		contentPane = new JPanel();
@@ -70,11 +70,11 @@ public class MainView extends JFrame {
 		btnLivro.setBounds(303, 107, 89, 23);
 		contentPane.add(btnLivro);
 		
-		JLabel lblEscolhaATabela = new JLabel("Escolha a tabela que deseja acessar.");
+		JLabel lblEscolhaATabela = new JLabel("Escolha a tabela que deseja acessar");
 		lblEscolhaATabela.setBounds(10, 37, 438, 23);
 		contentPane.add(lblEscolhaATabela);
 		
-		JButton btnMatricula = new JButton("Matricula");
+		JButton btnMatricula = new JButton("Matrícula");
 		btnMatricula.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new ViewMatricula().setVisible(true);	

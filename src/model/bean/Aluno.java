@@ -32,12 +32,4 @@ public class Aluno {
 	public void setDataInicio(String dataInicio) {
 		this.dataInicio = dataInicio;
 	}
-	
-	
-	/*public void setDataInicio(Date dataInicio){
-		this.dataInicio = dataInicio;
-	}
-	public void getDataInicio(){
-		return dataInicio;
-	}*/
 }

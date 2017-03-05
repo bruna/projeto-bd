@@ -26,7 +26,7 @@ public class MatriculaDAO {
 			stmt.setString(1, m.getCPF());
 			stmt.setString(2, m.getNumDiscipl());
 			stmt.setString(3, m.getSemestre());
-			stmt.setString(4, m.getNota());
+			stmt.setFloat(4, m.getNota());
 			
 			stmt.executeUpdate();
 			JOptionPane.showMessageDialog(null, "Salvo com sucesso!");
@@ -59,7 +59,7 @@ public class MatriculaDAO {
 				matricula.setCPF(rs.getString("CPF"));
 				matricula.setNumDiscipl(rs.getString("NumDiscipl"));
 				matricula.setSemestre(rs.getString("Semestre"));
-				matricula.setNota(rs.getString("Nota"));
+				matricula.setNota(rs.getFloat("Nota"));
 				
 				matriculas.add(matricula);	
 			}
@@ -70,8 +70,31 @@ public class MatriculaDAO {
 			ConnectionFactory.closeConnection(con, stmt, rs);
 		}
 		
-		return matriculas;
+		return matriculas;	
+	}
+	
+public void update(Matricula m){
 		
+		Connection con = ConnectionFactory.getConnection();
+		PreparedStatement stmt = null;
+		
+		try {
+			stmt = con.prepareStatement("UPDATE MATRICULA SET CPF = ?, NumDiscipl = ?, Semestre = ?, Nota = ? WHERE cpf = ?");
+			stmt.setString(1, m.getCPF());
+			stmt.setString(2, m.getNumDiscipl());
+			stmt.setString(3, m.getSemestre());
+			stmt.setFloat(4, m.getNota());
+			stmt.setString(5, m.getCPF());
+			
+			stmt.executeUpdate();
+			JOptionPane.showMessageDialog(null, "Atualizado com sucesso!");
+			
+		}catch (SQLException ex) {
+			JOptionPane.showMessageDialog(null, "Erro ao atualizar: "+ex);
+			
+		}finally{
+			ConnectionFactory.closeConnection(con, stmt);
+		}
 		
 	}
 

@@ -37,8 +37,4 @@ public class Livro {
 	public void setAutor(String newautor) {
 		autor = newautor;
 	}
-	
-	
-	
-
 }

@@ -5,7 +5,7 @@ public class Matricula {
 	private String CPF;
 	private String NumDiscipl;
 	private String Semestre;
-	private String Nota;
+	private float Nota;
 	
 	public String getCPF() {
 		return CPF;
@@ -25,12 +25,10 @@ public class Matricula {
 	public void setSemestre(String semestre) {
 		Semestre = semestre;
 	}
-	public String getNota() {
+	public float getNota() {
 		return Nota;
 	}
-	public void setNota(String nota) {
+	public void setNota(float nota) {
 		Nota = nota;
-	}
-
-	
+	}	
 }

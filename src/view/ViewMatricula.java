@@ -18,7 +18,9 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
+import model.bean.Livro;
 import model.bean.Matricula;
+import model.dao.LivroDAO;
 import model.dao.MatriculaDAO;
 
 import javax.swing.JScrollPane;
@@ -82,7 +84,7 @@ public class ViewMatricula extends JFrame {
 				m.setCPF(txtCPF.getText());
 				m.setNumDiscipl(txtDNumDiscipl.getText());
 				m.setSemestre(txtSemestre.getText());
-				m.setNota(txtNota.getText());
+				m.setNota(new Float(txtNota.getText()).floatValue());
 				
 				mdao.create(m);
 								
@@ -129,7 +131,7 @@ public class ViewMatricula extends JFrame {
 					dtmProdutos.removeRow(jTProduto.getSelectedRow());
 					//System.out.println("Linha selecionada: "+jTProduto.getSelectedRow());
 				}else{
-					JOptionPane.showMessageDialog(null, "Selecione um produto para excluir");
+					JOptionPane.showMessageDialog(null, "Selecione uma matrícula para excluir");
 				}
 				
 				
@@ -149,15 +151,25 @@ public class ViewMatricula extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				
 				if(jTProduto.getSelectedRow()!=-1){
-					JOptionPane.showMessageDialog(null, "Atenção ao alterar os dados");
+					Matricula m = new Matricula();
+					MatriculaDAO mdao = new MatriculaDAO();
 					
-					jTProduto.setValueAt(txtCPF.getText(), jTProduto.getSelectedRow(), 0);
-					jTProduto.setValueAt(txtDNumDiscipl.getText(), jTProduto.getSelectedRow(), 1);
-					jTProduto.setValueAt(txtSemestre.getText(), jTProduto.getSelectedRow(), 2);
-					jTProduto.setValueAt(txtNota.getText(), jTProduto.getSelectedRow(), 3);
+					m.setCPF(txtCPF.getText());
+					m.setNumDiscipl(txtDNumDiscipl.getText());
+					m.setSemestre(txtSemestre.getText());
+					m.setNota(new Float(txtNota.getText()).floatValue());
+					
+					mdao.update(m);
+					
+					txtCPF.setText("");
+					txtDNumDiscipl.setText("");
+					txtSemestre.setText("");
+					txtNota.setText("");
+					
+					readJTable();
 					
 				}else{
-					JOptionPane.showMessageDialog(null, "Selecione um produto para atualizar");
+					JOptionPane.showMessageDialog(null, "Selecione uma matrícula para atualizar");
 				}
 				
 				

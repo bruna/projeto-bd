@@ -10,6 +10,7 @@ import java.util.logging.Logger;//Atencao pacote diferente do import de Bruna
 import javax.swing.JOptionPane;
 import connection.ConnectionFactory;
 import model.bean.Livro;
+import model.bean.LivroAdotado;
 
 public class LivroDAO {
 	
@@ -69,4 +70,27 @@ public class LivroDAO {
 		
 	}
 
+	public void update(Livro l){
+		
+		Connection con = ConnectionFactory.getConnection();
+		PreparedStatement stmt = null;
+		
+		try {
+			stmt = con.prepareStatement("UPDATE LIVRO SET ISBNLivro = ?, tituloLivro = ?, editora = ?, edicao = ?, autor = ? WHERE ISBNLivro = ?");
+			stmt.setString(1,l.getISBNLivro());
+			stmt.setString(2,l.getTituloLivro());
+			stmt.setString(3,l.getEditora());
+			stmt.setString(4,l.getEdicao());
+			stmt.setString(5,l.getAutor());
+			stmt.setString(6,l.getISBNLivro());
+			
+			stmt.executeUpdate();
+			
+			JOptionPane.showMessageDialog(null, "Atualizado com sucesso!");	
+		} catch (SQLException ex) {
+			JOptionPane.showMessageDialog(null, "Erro ao atualizar: "+ex);
+		}finally{
+			ConnectionFactory.closeConnection(con, stmt);
+		}
+	}
 }

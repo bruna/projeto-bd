@@ -20,7 +20,9 @@ import javax.swing.table.TableRowSorter;
 
 import model.bean.Disciplina;
 import model.bean.Livro;
+import model.bean.LivroAdotado;
 import model.dao.DisciplinaDAO;
+import model.dao.LivroAdotadoDAO;
 import model.dao.LivroDAO;
 
 import javax.swing.JScrollPane;
@@ -151,25 +153,33 @@ public class ViewLivro extends JFrame {
 		panel.add(btnExcluir);
 		
 		JButton btnAtualizar = new JButton("Atualizar");
-		
-		
-		
-		
+
 		btnAtualizar.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
 				
 				if(jTProduto.getSelectedRow()!=-1){
-					JOptionPane.showMessageDialog(null, "Atenção ao alterar os dados");
+					Livro l = new Livro();
+					LivroDAO ldao = new LivroDAO();
 					
-					jTProduto.setValueAt(txtISBNLivro.getText(), jTProduto.getSelectedRow(), 0);
-					jTProduto.setValueAt(txtTituloLivro.getText(), jTProduto.getSelectedRow(), 1);
-					jTProduto.setValueAt(txtEditora.getText(), jTProduto.getSelectedRow(), 2);
-					jTProduto.setValueAt(txtEdicao.getText(), jTProduto.getSelectedRow(), 3);
-					jTProduto.setValueAt(txtAutor.getText(), jTProduto.getSelectedRow(), 4);
+					l.setISBNLivro(txtISBNLivro.getText());
+					l.setTituloLivro(txtTituloLivro.getText());
+					l.setEditora(txtEditora.getText());
+					l.setEdicao(txtEdicao.getText());
+					l.setAutor(txtAutor.getText());
+					
+					ldao.update(l);
+					
+					txtISBNLivro.setText("");
+					txtTituloLivro.setText("");
+					txtEditora.setText("");
+					txtEdicao.setText("");
+					txtAutor.setText("");
+					
+					readJTable();
 					
 				}else{
-					JOptionPane.showMessageDialog(null, "Selecione um produto para atualizar");
+					JOptionPane.showMessageDialog(null, "Selecione um livro para atualizar");
 				}
 				
 				

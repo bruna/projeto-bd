@@ -20,8 +20,10 @@ import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
 import model.bean.Aluno;
+import model.bean.Disciplina;
 import model.bean.LivroAdotado;
 import model.dao.AlunoDAO;
+import model.dao.DisciplinaDAO;
 import model.dao.LivroAdotadoDAO;
 
 import javax.swing.JScrollPane;
@@ -149,19 +151,28 @@ public class ViewLivroAdotado extends JFrame {
 		
 		btnAtualizar.addActionListener(new ActionListener() {
 			
-			public void actionPerformed(ActionEvent e) {
+public void actionPerformed(ActionEvent e) {
 				
 				if(jTProduto.getSelectedRow()!=-1){
-					JOptionPane.showMessageDialog(null, "Atenção ao alterar os dados");
 					
-					jTProduto.setValueAt(txtNumDiscipl.getText(), jTProduto.getSelectedRow(), 0);
-					jTProduto.setValueAt(txtSemestre.getText(), jTProduto.getSelectedRow(), 1);
-					jTProduto.setValueAt(txtISBNLivro.getText(), jTProduto.getSelectedRow(), 2);
+					LivroAdotado la = new LivroAdotado();
+					LivroAdotadoDAO ladao = new LivroAdotadoDAO();
+					
+					la.setNumDiscipl(txtNumDiscipl.getText());
+					la.setSemestre(txtSemestre.getText());
+					la.setISBNLivro(txtISBNLivro.getText());
+					
+					ladao.update(la);
+					
+					txtNumDiscipl.setText("");
+					txtSemestre.setText("");
+					txtISBNLivro.setText("");
+					
+					readJTable();
 					
 				}else{
-					JOptionPane.showMessageDialog(null, "Selecione um produto para atualizar");
+					JOptionPane.showMessageDialog(null, "Selecione um livro adotado para atualizar");
 				}
-				
 				
 			}
 		});

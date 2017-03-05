@@ -24,7 +24,4 @@ public class LivroAdotado {
 	public void setISBNLivro(String iSBNLivro) {
 		ISBNLivro = iSBNLivro;
 	}
-	
-	
-
 }

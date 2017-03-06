@@ -129,9 +129,19 @@ public class ViewDisciplina extends JFrame {
 				
 				
 				if(jTProduto.getSelectedRow()!= -1){
-					DefaultTableModel dtmProdutos = (DefaultTableModel)jTProduto.getModel();
-					dtmProdutos.removeRow(jTProduto.getSelectedRow());
-					//System.out.println("Linha selecionada: "+jTProduto.getSelectedRow());
+					
+					Disciplina d= new Disciplina();
+					DisciplinaDAO ddao = new DisciplinaDAO();
+
+					d.setNumDiscipl(txtNumDiscipl.getText());
+
+					ddao.delete(d);
+
+					txtNumDiscipl.setText("");
+					txtDNome.setText("");
+					txtDepto.setText("");
+
+					readJTable();
 				}else{
 					JOptionPane.showMessageDialog(null, "Selecione um produto para excluir");
 				}

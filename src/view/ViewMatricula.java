@@ -18,8 +18,10 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
+import model.bean.Aluno;
 import model.bean.Livro;
 import model.bean.Matricula;
+import model.dao.AlunoDAO;
 import model.dao.LivroDAO;
 import model.dao.MatriculaDAO;
 
@@ -75,10 +77,6 @@ public class ViewMatricula extends JFrame {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				/*DefaultTableModel dtmProdutos = (DefaultTableModel)jTProduto.getModel();
-				Object[] dados = {txtCPF.getText(),txtDNumDiscipl.getText(),txtSemestre.getText(),txtNota.getText()};
-				dtmProdutos.addRow(dados);*/
-				
 				Matricula m = new Matricula();
 				MatriculaDAO mdao = new MatriculaDAO();
 				m.setCPF(txtCPF.getText());
@@ -87,6 +85,11 @@ public class ViewMatricula extends JFrame {
 				m.setNota(new Float(txtNota.getText()).floatValue());
 				
 				mdao.create(m);
+				
+				txtCPF.setText("");
+				txtDNumDiscipl.setText("");
+				txtSemestre.setText("");
+				txtNota.setText("");
 								
 				readJTable();
 			}
@@ -127,9 +130,21 @@ public class ViewMatricula extends JFrame {
 				
 				
 				if(jTProduto.getSelectedRow()!= -1){
-					DefaultTableModel dtmProdutos = (DefaultTableModel)jTProduto.getModel();
-					dtmProdutos.removeRow(jTProduto.getSelectedRow());
-					//System.out.println("Linha selecionada: "+jTProduto.getSelectedRow());
+					Matricula m = new Matricula();
+					MatriculaDAO mdao = new MatriculaDAO();
+
+					m.setCPF(txtCPF.getText());
+					m.setNumDiscipl(txtDNumDiscipl.getText());
+					m.setSemestre(txtSemestre.getText());
+
+					mdao.delete(m);
+
+					txtCPF.setText("");
+					txtDNumDiscipl.setText("");
+					txtSemestre.setText("");
+					txtNota.setText("");
+
+					readJTable();
 				}else{
 					JOptionPane.showMessageDialog(null, "Selecione uma matrícula para excluir");
 				}

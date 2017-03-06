@@ -18,9 +18,11 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
+import model.bean.Aluno;
 import model.bean.Disciplina;
 import model.bean.Livro;
 import model.bean.LivroAdotado;
+import model.dao.AlunoDAO;
 import model.dao.DisciplinaDAO;
 import model.dao.LivroAdotadoDAO;
 import model.dao.LivroDAO;
@@ -78,10 +80,6 @@ public class ViewLivro extends JFrame {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				/*DefaultTableModel dtmProdutos = (DefaultTableModel)jTProduto.getModel();
-				Object[] dados = {txtISBNLivro.getText(),txtTituloLivro.getText(),txtEditora.getText(),
-						txtEdicao.getText(),txtAutor.getText()};
-				dtmProdutos.addRow(dados);*/
 				
 				Livro l = new Livro();
 				LivroDAO ldao = new LivroDAO();
@@ -138,9 +136,21 @@ public class ViewLivro extends JFrame {
 				
 				
 				if(jTProduto.getSelectedRow()!= -1){
-					DefaultTableModel dtmProdutos = (DefaultTableModel)jTProduto.getModel();
-					dtmProdutos.removeRow(jTProduto.getSelectedRow());
-					//System.out.println("Linha selecionada: "+jTProduto.getSelectedRow());
+					
+					Livro l = new Livro();
+					LivroDAO ldao = new LivroDAO();
+
+					l.setISBNLivro(txtISBNLivro.getText());
+
+					ldao.delete(l);
+
+					txtISBNLivro.setText("");
+					txtTituloLivro.setText("");
+					txtEditora.setText("");
+					txtEdicao.setText("");
+					txtAutor.setText("");
+
+					readJTable();
 				}else{
 					JOptionPane.showMessageDialog(null, "Selecione um produto para excluir");
 				}

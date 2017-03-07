@@ -5,7 +5,7 @@ insert into ALUNO(CPF,Nome,Curso,DataI) values
     ('98777777744', 'Mario', 'Biologia', '22-05-2016');
     
 insert into DISCIPLINA(NumDiscipl,Dnome,Depto) values
-	('1','Cauculo','Matematica'),
+	('1','Calculo','Matematica'),
     ('2','Fisica','Ciencias'),
     ('3','Portugues','Linguas');
     
@@ -15,9 +15,9 @@ insert into MATRICULA(CPF,NumDiscipl,Semestre,Nota) values
     ('98777777744','3','2015.1','10');
     
 insert into LIVRO(ISBNLivro,TituloLivro,Editora,Edicao,Autor) values
-	('10','Calculo a Varias Variaveis','Exatamente','18','Claudio'),
-    ('11','Gramatica','Plus','2','Marcia'),
-    ('12','Fisica 2','Menos','30','Vertel');
+	('10','Calculo a Varias Variaveis','Exatas','18','Claudio'),
+    ('11','Gramatica','Moderna','2','Marcia'),
+    ('12','Fisica 2','Menos','30','Boldrini');
     
 insert into LivroAdotado(NumDiscipl,Semestre,ISBNLivro) values
 	('1','2015.1','10'),

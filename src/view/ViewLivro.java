@@ -1,30 +1,18 @@
 package view;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-import javax.swing.RowSorter;
 import javax.swing.JButton;
 import javax.swing.JTable;
-import javax.swing.border.BevelBorder;
-import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
-
-import model.bean.Aluno;
-import model.bean.Disciplina;
 import model.bean.Livro;
-import model.bean.LivroAdotado;
-import model.dao.AlunoDAO;
-import model.dao.DisciplinaDAO;
-import model.dao.LivroAdotadoDAO;
 import model.dao.LivroDAO;
 
 import javax.swing.JScrollPane;
@@ -35,6 +23,7 @@ import java.awt.event.MouseEvent;
 
 public class ViewLivro extends JFrame {
 
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField txtISBNLivro;
 	private JTextField txtTituloLivro;
@@ -43,9 +32,6 @@ public class ViewLivro extends JFrame {
 	private JTextField txtEdicao;
 	private JTextField txtAutor;
 
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -59,9 +45,6 @@ public class ViewLivro extends JFrame {
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
 	public ViewLivro() {
 		setTitle("Tabela Livro");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -244,6 +227,8 @@ public class ViewLivro extends JFrame {
 				"ISBNLivro", "TituloLivro", "Editora", "Edi\u00E7\u00E3o", "Autor"
 			}
 		) {
+			
+			private static final long serialVersionUID = 1L;
 			boolean[] columnEditables = new boolean[] {
 				false, false, false, true, true
 			};

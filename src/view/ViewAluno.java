@@ -1,37 +1,31 @@
 package view;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-import javax.swing.RowSorter;
 import javax.swing.JButton;
 import javax.swing.JTable;
-import javax.swing.border.BevelBorder;
-import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
-
 import model.bean.Aluno;
+import model.bean.ValidaCPF;
 import model.dao.AlunoDAO;
-
 import javax.swing.JScrollPane;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.sql.Date;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 public class ViewAluno extends JFrame {
 
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField txtCPF;
 	private JTextField txtNome;
@@ -39,9 +33,6 @@ public class ViewAluno extends JFrame {
 	private JTable jTProduto;
 	private JTextField txtDataI;
 
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -55,14 +46,8 @@ public class ViewAluno extends JFrame {
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
 	public ViewAluno() {
 		setTitle("Tabela Aluno");
-
-		// DefaultTableModel modelo = (DefaultTableModel) jTProduto.getModel();
-		// jTProduto.setRowSorter(new TableRowSorter<TableModel>(modelo));
 
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 806, 532);
@@ -95,27 +80,36 @@ public class ViewAluno extends JFrame {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				/*
-				 * DefaultTableModel dtmProdutos =
-				 * (DefaultTableModel)jTProduto.getModel(); Object[] dados =
-				 * {txtCPF.getText(),txtNome.getText(),txtCurso.getText(),
-				 * txtDataI.getText()}; dtmProdutos.addRow(dados);
-				 */
-
 				Aluno a = new Aluno();
 				AlunoDAO dao = new AlunoDAO();
-				a.setCpf(txtCPF.getText());
+				
+				String cpfAluno = txtCPF.getText();
+				
+				 if (ValidaCPF.isCPF(txtCPF.getText()) == true){
+					 if (dao.buscarCPF(cpfAluno) != null){
+						 JOptionPane.showMessageDialog(null, "CPF já cadastrado!");
+						  return;
+					 }else{
+						 a.setCpf(txtCPF.getText());
+					 }
+					
+				  }else{
+					  JOptionPane.showMessageDialog(null, "CPF inválido!");
+					  return;
+				  }
+			
+				
 				a.setNome(txtNome.getText());
 				a.setCurso(txtCurso.getText());
 				a.setDataInicio(txtDataI.getText());
-
+				
 				dao.create(a);
-
+				
 				txtCPF.setText("");
 				txtNome.setText("");
 				txtCurso.setText("");
 				txtDataI.setText("");
-
+				
 				readJTable();
 			}
 		});
@@ -209,11 +203,12 @@ public class ViewAluno extends JFrame {
 		btnAtualizar.setBounds(364, 114, 117, 23);
 		panel.add(btnAtualizar);
 
-		JLabel lblDatai = new JLabel("Datai");
+		JLabel lblDatai = new JLabel("Data Início");
 		lblDatai.setBounds(467, 11, 46, 14);
 		panel.add(lblDatai);
-
+		
 		txtDataI = new JTextField();
+		txtDataI.setToolTipText("Insira no formato dia-mes-ano");
 		txtDataI.setBounds(461, 36, 105, 20);
 		panel.add(txtDataI);
 		txtDataI.setColumns(10);
@@ -239,6 +234,8 @@ public class ViewAluno extends JFrame {
 		});
 		scrollPane.setViewportView(jTProduto);
 		jTProduto.setModel(new DefaultTableModel(new Object[][] {}, new String[] { "CPF", "Nome", "Curso", "Datai" }) {
+			
+			private static final long serialVersionUID = 1L;
 			boolean[] columnEditables = new boolean[] { false, true, true, true };
 
 			public boolean isCellEditable(int row, int column) {

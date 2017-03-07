@@ -1,28 +1,19 @@
 package view;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-import javax.swing.RowSorter;
 import javax.swing.JButton;
 import javax.swing.JTable;
-import javax.swing.border.BevelBorder;
-import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
-
-import model.bean.Aluno;
 import model.bean.Disciplina;
-import model.dao.AlunoDAO;
 import model.dao.DisciplinaDAO;
-
 import javax.swing.JScrollPane;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -31,15 +22,13 @@ import java.awt.event.MouseEvent;
 
 public class ViewDisciplina extends JFrame {
 
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField txtNumDiscipl;
 	private JTextField txtDNome;
 	private JTextField txtDepto;
 	private JTable jTProduto;
 
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -53,9 +42,6 @@ public class ViewDisciplina extends JFrame {
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
 	public ViewDisciplina() {
 		setTitle("Tabela Disciplina");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -73,10 +59,6 @@ public class ViewDisciplina extends JFrame {
 		JButton btnNewButton = new JButton("Inserir");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				/*DefaultTableModel dtmProdutos = (DefaultTableModel)jTProduto.getModel();
-				Object[] dados = {txtNumDiscipl.getText(),txtDNome.getText(),txtDepto.getText()};
-				dtmProdutos.addRow(dados);*/
 				
 				Disciplina d = new Disciplina();
 				DisciplinaDAO ddao = new DisciplinaDAO();
@@ -127,7 +109,6 @@ public class ViewDisciplina extends JFrame {
 		btnExcluir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				
 				if(jTProduto.getSelectedRow()!= -1){
 					
 					Disciplina d= new Disciplina();
@@ -145,9 +126,6 @@ public class ViewDisciplina extends JFrame {
 				}else{
 					JOptionPane.showMessageDialog(null, "Selecione um produto para excluir");
 				}
-				
-				
-	
 			}
 		});
 		btnExcluir.setBounds(206, 114, 89, 23);
@@ -177,8 +155,7 @@ public class ViewDisciplina extends JFrame {
 					
 				}else{
 					JOptionPane.showMessageDialog(null, "Selecione uma disciplina para atualizar");
-				}
-				
+				}	
 			}
 		});
 		btnAtualizar.setBounds(364, 114, 89, 23);
@@ -210,6 +187,7 @@ public class ViewDisciplina extends JFrame {
 				"NumDiscipl", "Dnome", "Depto"
 			}
 		) {
+			private static final long serialVersionUID = 1L;
 			boolean[] columnEditables = new boolean[] {
 				false, true, true
 			};
@@ -234,9 +212,7 @@ public class ViewDisciplina extends JFrame {
 					d.getNumDiscipl(),
 					d.getDnome(),
 					d.getDepto()
-			});
-			
-		}
-		
+			});	
+		}		
 	}
 }

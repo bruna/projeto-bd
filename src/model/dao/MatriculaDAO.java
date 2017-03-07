@@ -49,7 +49,7 @@ public class MatriculaDAO {
 		List<Matricula> matriculas = new ArrayList<>();
 
 		try {
-			stmt = con.prepareStatement("SELECT * FROM matricula");
+			stmt = con.prepareStatement("SELECT * FROM MATRICULA");
 			rs = stmt.executeQuery();
 
 			while (rs.next()) {
@@ -111,7 +111,7 @@ public class MatriculaDAO {
 
 			stmt.executeUpdate();
 
-			JOptionPane.showMessageDialog(null, "Excluido com sucesso!");
+			JOptionPane.showMessageDialog(null, "Excluído com sucesso!");
 		} catch (SQLException ex) {
 			JOptionPane.showMessageDialog(null, "Erro ao excluir: " + ex);
 		} finally {

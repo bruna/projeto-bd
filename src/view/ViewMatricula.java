@@ -1,30 +1,19 @@
 package view;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-import javax.swing.RowSorter;
 import javax.swing.JButton;
 import javax.swing.JTable;
-import javax.swing.border.BevelBorder;
-import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
-
-import model.bean.Aluno;
-import model.bean.Livro;
 import model.bean.Matricula;
-import model.dao.AlunoDAO;
-import model.dao.LivroDAO;
 import model.dao.MatriculaDAO;
-
 import javax.swing.JScrollPane;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -33,6 +22,7 @@ import java.awt.event.MouseEvent;
 
 public class ViewMatricula extends JFrame {
 
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField txtCPF;
 	private JTextField txtDNumDiscipl;
@@ -40,9 +30,6 @@ public class ViewMatricula extends JFrame {
 	private JTable jTProduto;
 	private JTextField txtNota;
 
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -56,11 +43,8 @@ public class ViewMatricula extends JFrame {
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
 	public ViewMatricula() {
-		setTitle("Tabela Matricula");
+		setTitle("Tabela MatrÃ­cula");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 806, 532);
 		contentPane = new JPanel();
@@ -146,7 +130,7 @@ public class ViewMatricula extends JFrame {
 
 					readJTable();
 				}else{
-					JOptionPane.showMessageDialog(null, "Selecione uma matrícula para excluir");
+					JOptionPane.showMessageDialog(null, "Selecione uma matrï¿½cula para excluir");
 				}
 				
 				
@@ -184,7 +168,7 @@ public class ViewMatricula extends JFrame {
 					readJTable();
 					
 				}else{
-					JOptionPane.showMessageDialog(null, "Selecione uma matrícula para atualizar");
+					JOptionPane.showMessageDialog(null, "Selecione uma matrï¿½cula para atualizar");
 				}
 				
 				
@@ -229,6 +213,7 @@ public class ViewMatricula extends JFrame {
 				"CPF", "NumDiscipl", "Semestre", "Nota"
 			}
 		) {
+			private static final long serialVersionUID = 1L;
 			boolean[] columnEditables = new boolean[] {
 				false, false, true, true
 			};

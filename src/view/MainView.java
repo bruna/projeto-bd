@@ -1,8 +1,6 @@
 package view;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -13,11 +11,9 @@ import java.awt.event.ActionEvent;
 
 public class MainView extends JFrame {
 
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -31,9 +27,6 @@ public class MainView extends JFrame {
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
 	public MainView() {
 		setTitle("MiniSiga UFRPE");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -74,7 +67,7 @@ public class MainView extends JFrame {
 		lblEscolhaATabela.setBounds(10, 37, 438, 23);
 		contentPane.add(lblEscolhaATabela);
 		
-		JButton btnMatricula = new JButton("Matrícula");
+		JButton btnMatricula = new JButton("Matricula");
 		btnMatricula.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new ViewMatricula().setVisible(true);	

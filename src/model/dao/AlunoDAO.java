@@ -108,4 +108,34 @@ public class AlunoDAO {
 			ConnectionFactory.closeConnection(con, stmt);
 		}
 	}
+	
+	public Aluno buscarCPF(String cpf){
+		Connection connection = ConnectionFactory.getConnection();
+		java.sql.PreparedStatement stmt = null;
+		ResultSet resultSet = null;
+		String consulta = "SELECT * FROM aluno WHERE aluno.cpf = ";
+		try{	
+			stmt = connection.prepareStatement(consulta+cpf);
+			resultSet = stmt.executeQuery();
+			
+			
+			while (resultSet.next()){
+				
+				Aluno aluno = new Aluno();
+				aluno.setCpf(resultSet.getString("CPF"));
+				aluno.setNome(resultSet.getString("Nome"));
+				aluno.setCurso(resultSet.getString("Curso"));
+				aluno.setDataInicio(resultSet.getString("DataI"));
+				
+				return aluno;
+			 }
+			
+		}catch (SQLException ex){
+			JOptionPane.showMessageDialog(null, "Erro ao buscar aluno por CPF - "+ ex);
+		}
+		finally{
+			ConnectionFactory.closeConnection(connection, stmt, resultSet);
+		}
+		return null;
+	}
 }

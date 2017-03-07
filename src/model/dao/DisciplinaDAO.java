@@ -99,7 +99,7 @@ public class DisciplinaDAO {
 
 			stmt.executeUpdate();
 
-			JOptionPane.showMessageDialog(null, "Excluido com sucesso!");
+			JOptionPane.showMessageDialog(null, "Excluído com sucesso!");
 		} catch (SQLException ex) {
 			JOptionPane.showMessageDialog(null, "Erro ao excluir: " + ex);
 		} finally {
